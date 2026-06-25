@@ -44,7 +44,7 @@ DEV_MODE = True
 def get_uvx_args(uvx_path: str, base_dir: Path, real_config_dir: str) -> list[str]:
     if DEV_MODE:
         return [uvx_path, "-q", "--from", str(base_dir), "llm-council-mcp", f"--config-dir={real_config_dir}"]
-    return [uvx_path, "-q", "llm-council-mcp@0.1.0", f"--config-dir={real_config_dir}"]
+    return [uvx_path, "-q", "--from", "llm-council-setup@0.1.0", "llm-council-mcp", f"--config-dir={real_config_dir}"]
 
 
 # ---------------------------------------------------------------------------
