@@ -21,7 +21,7 @@ Prompt templates for all 3 stages are copied **word-for-word** from `backend/run
 **Deliberately left out** (for a lean, personal tool):
 - TOON encoding of Stage 1/2 data (just token efficiency, doesn't change outcome).
 - Web search / tool results in Stage 1.
-- Editable prompts/temperatures via UI — these remain constants in `council_core.py` to preserve prompt fidelity. If you want to change them, edit the file directly.
+- Editable prompts via UI — prompt templates remain constants in `council_core.py` to preserve prompt fidelity. Temperatures and max tokens, however, can be customized in the Setup UI settings.
 - Conversation history / multi-turn memory.
 
 The server has **no direct file access**. This is intentional: the calling tool (Claude Code, Codex, Antigravity) already has access to your local files and passes relevant code/context as parameters (`code_context`) during the tool call.
@@ -147,7 +147,7 @@ Die Prompt-Templates für alle 3 Stufen sind **wortwörtlich** aus `backend/runt
 **Bewusst weggelassen** (für ein schlankes, persönliches Tool):
 - TOON-Encoding der Stufe-1/2-Daten (im Original nur eine Token-Effizienz-Optimierung, ändert das Ergebnis nicht).
 - Web-Suche / Tool-Ergebnisse in Stufe 1.
-- Editierbare Prompts/Temperaturen über die UI — die bleiben bewusst Konstanten in `council_core.py`, um die geprüfte Prompt-Treue zum Original nicht gefährden. Wer sie ändern will, editiert die Datei direkt.
+- Editierbare Prompts über die UI — Prompt-Vorlagen bleiben Konstanten in `council_core.py`, um die Prompt-Treue zum Original nicht zu gefährden. Temperaturen und maximale Token können jedoch direkt in den Einstellungen der Setup-UI angepasst werden.
 - Konversationsverlauf / Multi-Turn-Memory.
 
 Der Server hat **keinen eigenen Dateizugriff**. Das ist Absicht: Das aufrufende Tool (Claude Code, Codex, Antigravity) hat bereits Zugriff auf deinen lokalen Code und übergibt relevanten Code/Kontext direkt als Parameter (`code_context`) beim Tool-Aufruf.
