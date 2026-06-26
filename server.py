@@ -218,6 +218,9 @@ def _maybe_start_setup_ui() -> None:
             if is_our_ui(port):
                 target_port = port
                 should_start_ui = False
+                # UI is already running (e.g. from a previous server start that
+                # the LLM client restarted). Don't spawn another browser tab.
+                should_open_browser = False
             else:
                 for fallback_port in range(5152, 5161):
                     if not is_port_in_use(fallback_port):
