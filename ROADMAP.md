@@ -13,5 +13,9 @@
 ## Later / Maybe
 - Windows-Support (aktuell Mac-zentriert).
 - Weitere Hosts (z. B. Cursor).
-- Aus dem Original bewusst ausgelassen: TOON-Encoding, Web-Suche in Stufe 1 — nur falls je gewünscht.
+- Aus dem Original bewusst ausgelassen: TOON-Encoding.
+- Optionale Web-Suche in Stufe 1 (optionaler Aufruf externer Quellen).
+- Bearbeitbare Prompt-Vorlagen in der UI / Konfiguration für maximale Anpassbarkeit.
+- Alternative Modi für das Council (z. B. ein Modell als dedizierter "Kritiker" oder Advocatus Diaboli).
+- Diskussions-Modus / Chat-Verlauf (z. B. iterativer Dialog zwischen dem anfragenden Client und dem Chairman, um gemeinschaftlich abzustimmen, welche Dateien für die Entscheidung im Kontext benötigt werden).
 - `open_ui_on_start`-Default für sehr breite Distribution überdenken (aktuell True).
