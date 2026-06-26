@@ -6,7 +6,19 @@
 
 # English Version
 
-A lightweight, local MCP server for your Mac that replicates the 3-stage workflow of [llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus) — using the **exact original prompts** directly against OpenRouter, without any Docker or NAS dependencies. Works with Claude Code, Codex CLI, and Antigravity via MCP.
+## Table of Contents
+- [What it is (and what it isn't)](#what-it-is-and-what-it-isnt)
+- [Installation & Setup](#installation--setup)
+- [Quick Start / First Run](#-quick-start--first-run)
+- [Setup UI & Settings Storage](#setup-ui--settings-storage)
+- [Usage](#usage)
+- [Tool Registration (Manual)](#tool-registration-manual-alternative-to-setup-ui)
+- [Troubleshooting](#-troubleshooting)
+- [Credits](#credits)
+
+---
+
+A lightweight, local MCP server for your Mac based on the original idea by Andrej Karpathy ([karpathy/llm-council](https://github.com/karpathy/llm-council)) with prompt/workflow templates ported from [DmitryBMsk/llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus). It replicates the 3-stage workflow using the **exact original prompts** directly against OpenRouter, without any Docker or NAS dependencies. Works with Claude Code, Codex CLI, and Antigravity via MCP.
 
 ## What it is (and what it isn't)
 
@@ -176,7 +188,19 @@ args = ["/path/to/llm-council-mcp/server.py"]
 
 # Deutsche Version
 
-Ein schlanker, lokaler MCP-Server für deinen Mac, der den 3-Stufen-Workflow von [llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus) nachbildet — mit den **exakten Original-Prompts**, direkt gegen OpenRouter, ohne Docker- oder NAS-Abhängigkeit. Nutzbar aus Claude Code, Codex CLI und Antigravity über MCP.
+## Inhaltsverzeichnis
+- [Was das ist (und was nicht)](#was-das-ist-und-was-nicht)
+- [Installation & Setup](#installation--setup-1)
+- [Schnellstart / Erster Lauf](#-schnellstart--erster-lauf)
+- [Setup-UI & Speicherort der Einstellungen](#setup-ui--speicherort-der-einstellungen)
+- [Nutzung](#nutzung)
+- [Tool-Registrierung (Manuell)](#tool-registrierung-manuell-alternativ-zur-setup-ui)
+- [Fehlerbehebung](#-fehlerbehebung)
+- [Credits](#credits-1)
+
+---
+
+Ein schlanker, lokaler MCP-Server für deinen Mac basierend auf der Originalidee von Andrej Karpathy ([karpathy/llm-council](https://github.com/karpathy/llm-council)) mit Prompt-/Workflow-Vorlagen portiert aus [DmitryBMsk/llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus). Er bildet den 3-Stufen-Workflow mit den **exakten Original-Prompts** direkt gegen OpenRouter nach, ohne Docker- oder NAS-Abhängigkeit. Nutzbar aus Claude Code, Codex CLI und Antigravity über MCP.
 
 ## Was das ist (und was nicht)
 
