@@ -7,7 +7,7 @@
 # English Version
 
 ## Table of Contents
-- [What it is (and what it isn't)](#what-it-is-and-what-it-isnt)
+- [What it is (and how it works)](#what-it-is-and-how-it-works)
 - [Installation & Setup](#installation--setup)
 - [Quick Start / First Run](#-quick-start--first-run)
 - [Setup UI & Settings Storage](#setup-ui--settings-storage)
@@ -20,23 +20,21 @@
 
 A lightweight, local MCP server for your Mac based on the original idea by Andrej Karpathy ([karpathy/llm-council](https://github.com/karpathy/llm-council)) with prompt/workflow templates ported from [DmitryBMsk/llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus). It replicates the 3-stage workflow using the **exact original prompts** directly against OpenRouter, without any Docker or NAS dependencies. Works with Claude Code, Codex CLI, and Antigravity via MCP.
 
-## What it is (and what it isn't)
+## What it is (and how it works)
 
-`council_core.py` is a standalone Python port of the 3 stages from `backend/council.py` and `backend/runtime_settings.py` of the original `llm-council-plus` repository:
+This tool replicates the AI deliberation process of the original project in three simple steps:
 
-1. **Stage 1** — Each council model answers your query independently in parallel.
-2. **Stage 2** — Each model rates/ranks the anonymized answers of the others ("Response A", "Response B", ...), so no model can recognize and favor its own answer.
-3. **Stage 3** — A Chairman model reads Stage 1 + 2 and writes a final synthesized answer. If the Chairman fails, the code automatically falls back to other council models as Chairman (1:1 fallback logic from original).
+1. **Stage 1 (Answering):** Several AI models answer your question independently and at the same time.
+2. **Stage 2 (Reviewing):** The models read all the answers without knowing who wrote which answer (blind review). Each model ranks the answers from best to worst to prevent self-bias.
+3. **Stage 3 (Synthesis):** A final "Chairman" model reads all answers and reviews, and writes a single, balanced response for you. If the Chairman fails, another model automatically takes over.
 
-Prompt templates for all 3 stages are copied **word-for-word** from `backend/runtime_settings.py`, as well as the default temperatures (Stage 1: 0.5, Stage 2: 0.3, Stage 3: 0.4) and OpenRouter request logic (retries with backoff on 429).
+The AI prompt instructions and settings are copied exactly from the original project to ensure the same high quality.
 
-**Deliberately left out** (for a lean, personal tool):
-- TOON encoding of Stage 1/2 data (just token efficiency, doesn't change outcome).
-- Web search / tool results in Stage 1.
-- Editable prompts via UI — prompt templates remain constants in `council_core.py` to preserve prompt fidelity. Temperatures and max tokens, however, can be customized in the Setup UI settings.
-- Conversation history / multi-turn memory.
-
-The server has **no direct file access**. This is intentional: the calling tool (Claude Code, Codex, Antigravity) already has access to your local files and passes relevant code/context as parameters (`code_context`) during the tool call.
+### What is left out (to keep it clean and simple):
+- **Web Search / Internet Access in Stage 1:** The models answer based on their training and the context you provide.
+- **Editable Prompts in the UI:** The AI instructions are kept permanent to guarantee reliable results. However, you can adjust the AI's "creativity" (temperatures) and length limits directly in the Setup UI.
+- **Chat History:** It is designed for single, deep-dive questions rather than long back-and-forth conversations.
+- **Direct File Access:** The tool does not read your files directly. Instead, your editor (like Claude Code or Antigravity) reads the relevant files and passes the code context automatically.
 
 ---
 
@@ -189,7 +187,7 @@ args = ["/path/to/llm-council-mcp/server.py"]
 # Deutsche Version
 
 ## Inhaltsverzeichnis
-- [Was das ist (und was nicht)](#was-das-ist-und-was-nicht)
+- [Was das ist (und wie es funktioniert)](#was-das-ist-und-wie-es-funktioniert)
 - [Installation & Setup](#installation--setup-1)
 - [Schnellstart / Erster Lauf](#-schnellstart--erster-lauf)
 - [Setup-UI & Speicherort der Einstellungen](#setup-ui--speicherort-der-einstellungen)
@@ -202,23 +200,21 @@ args = ["/path/to/llm-council-mcp/server.py"]
 
 Ein schlanker, lokaler MCP-Server für deinen Mac basierend auf der Originalidee von Andrej Karpathy ([karpathy/llm-council](https://github.com/karpathy/llm-council)) mit Prompt-/Workflow-Vorlagen portiert aus [DmitryBMsk/llm-council-plus](https://github.com/DmitryBMsk/llm-council-plus). Er bildet den 3-Stufen-Workflow mit den **exakten Original-Prompts** direkt gegen OpenRouter nach, ohne Docker- oder NAS-Abhängigkeit. Nutzbar aus Claude Code, Codex CLI und Antigravity über MCP.
 
-## Was das ist (und was nicht)
+## Was das ist (und wie es funktioniert)
 
-`council_core.py` ist eine eigenständige Python-Portierung der 3 Stufen aus `backend/council.py` und `backend/runtime_settings.py` des echten llm-council-plus-Repos:
+Dieses Tool bildet den Entscheidungsprozess des Originalprojekts in drei einfachen Schritten ab:
 
-1. **Stufe 1** — Jedes Council-Modell beantwortet deine Frage unabhängig, parallel.
-2. **Stufe 2** — Jedes Modell bewertet/rankt die anonymisierten Antworten der anderen ("Response A", "Response B", ...), damit kein Modell seine eigene Antwort erkennen und bevorzugen kann.
-3. **Stufe 3** — Ein Chairman-Modell liest Stufe 1 + 2 und schreibt eine finale, synthetisierte Antwort. Schlägt der Chairman fehl, probiert der Code automatisch die anderen Council-Modelle als Ersatz-Chairman durch (Fallback-Logik, 1:1 aus dem Original übernommen).
+1. **Stufe 1 (Antworten):** Mehrere KI-Modelle beantworten deine Frage gleichzeitig und unabhängig voneinander.
+2. **Stufe 2 (Bewerten):** Die Modelle lesen alle Antworten, ohne zu wissen, welches Modell welche Antwort geschrieben hat (Blindverkostung). Jedes Modell bewertet die Antworten, um Eigenvoreingenommenheit zu verhindern.
+3. **Stufe 3 (Zusammenfassen):** Ein finales "Chairman"-Modell liest alle Antworten und Bewertungen und verfasst eine ausgewogene Zusammenfassung für dich. Sollte das Chairman-Modell ausfallen, springt automatisch ein anderes Modell ein.
 
-Die Prompt-Templates für alle 3 Stufen sind **wortwörtlich** aus `backend/runtime_settings.py` kopiert (siehe `STAGE1_PROMPT_TEMPLATE`, `STAGE2_PROMPT_TEMPLATE`, `STAGE3_PROMPT_TEMPLATE` in `council_core.py`), ebenso die Default-Temperaturen (Stufe 1: 0.5, Stufe 2: 0.3, Stufe 3: 0.4) und das OpenRouter-Aufruf-Schema (Retry mit Backoff bei 429).
+Die KI-Anweisungen (Prompts) und Einstellungen wurden exakt aus dem Originalprojekt übernommen, um die gleiche hohe Qualität der Antworten zu garantieren.
 
-**Bewusst weggelassen** (für ein schlankes, persönliches Tool):
-- TOON-Encoding der Stufe-1/2-Daten (im Original nur eine Token-Effizienz-Optimierung, ändert das Ergebnis nicht).
-- Web-Suche / Tool-Ergebnisse in Stufe 1.
-- Editierbare Prompts über die UI — Prompt-Vorlagen bleiben Konstanten in `council_core.py`, um die Prompt-Treue zum Original nicht zu gefährden. Temperaturen und maximale Token können jedoch direkt in den Einstellungen der Setup-UI angepasst werden.
-- Konversationsverlauf / Multi-Turn-Memory.
-
-Der Server hat **keinen eigenen Dateizugriff**. Das ist Absicht: Das aufrufende Tool (Claude Code, Codex, Antigravity) hat bereits Zugriff auf deinen lokalen Code und übergibt relevanten Code/Kontext direkt als Parameter (`code_context`) beim Tool-Aufruf.
+### Was bewusst weggelassen wurde (für maximale Einfachheit):
+- **Web-Suche / Internetzugriff in Stufe 1:** Die Modelle antworten basierend auf ihrem Wissen und dem von dir übergebenen Kontext.
+- **Bearbeitbare Prompt-Vorlagen in der UI:** Die KI-Anweisungen sind fest hinterlegt, um zuverlässige Ergebnisse zu sichern. Du kannst jedoch die „Kreativität“ der KI (Temperaturen) und Längenbegrenzungen in der Setup-UI anpassen.
+- **Chat-Verlauf:** Das Tool ist für präzise Einzelentscheidungen gedacht, nicht für lange Hin-und-Her-Gespräche.
+- **Direkter Dateizugriff:** Das Tool liest deine Dateien nicht selbstständig von der Festplatte. Stattdessen liest dein Editor (wie Claude Code oder Antigravity) den Code aus und übergibt ihn automatisch an das Tool.
 
 ---
 
