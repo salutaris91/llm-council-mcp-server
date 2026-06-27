@@ -102,6 +102,14 @@ def claude_install(version: Optional[str] = None) -> Tuple[bool, str, str]:
     real_config_dir = _get_real_config_dir()
 
     try:
+        # `claude mcp add` refuses to overwrite an existing entry ("already
+        # exists in user config"), so an update would fail. Remove first
+        # (best-effort) to make install idempotent / update-capable, matching
+        # how the Codex/Antigravity installers overwrite their config.
+        subprocess.run(
+            [binary, "mcp", "remove", SERVER_NAME, "--scope", "user"],
+            capture_output=True, text=True, timeout=30,
+        )
         cmd = [binary, "mcp", "add", SERVER_NAME, "--scope", "user", "--"] + get_uvx_args(uvx_path, base_dir, real_config_dir, version)
         result = subprocess.run(
             cmd,

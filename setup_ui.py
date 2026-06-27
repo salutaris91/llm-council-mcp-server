@@ -176,6 +176,8 @@ TRANSLATIONS = {
         "installer_uninstall_error": "Fehler beim Entfernen: {detail}",
         "update_title": "Update verfügbar!",
         "update_body": "Eine neuere Version ({latest}) ist auf PyPI verfügbar (installiert: {installed}). So aktualisierst du: 1) den folgenden Befehl im Terminal ausführen (öffnet die aktualisierte Setup-UI, ggf. auf einem anderen Port), 2) dort pro Host auf 'Installieren' klicken, 3) den Host neu starten. Erst nach dem Host-Neustart verschwindet dieser Hinweis – bloßes Neuladen der Seite genügt nicht:",
+        "hosts_stale_title": "Aktualisierung noch nicht abgeschlossen",
+        "hosts_stale_body": "Folgende Host(s) laufen noch auf einer älteren Version (Ziel: {target}). Klicke unten pro Host auf „Aktualisieren\" und starte den jeweiligen Host danach neu:",
         "restart_title": "🔄 Neustart nötig:",
         "restart_hints": {
             "claude": "Starte eine neue Claude-Code-Session, damit der MCP-Server mit der neuen Version geladen wird (laufende Sessions nutzen weiter die alte).",
@@ -241,6 +243,8 @@ TRANSLATIONS = {
         "installer_uninstall_error": "Error during removal: {detail}",
         "update_title": "Update Available!",
         "update_body": "A newer version ({latest}) is available on PyPI (installed: {installed}). To update: 1) run the following command in your terminal (it opens the updated setup UI, possibly on a different port), 2) click 'Install' for each host there, 3) restart the host. This notice only disappears after the host restart – reloading this page alone is not enough:",
+        "hosts_stale_title": "Update not finished yet",
+        "hosts_stale_body": "The following host(s) still run an older version (target: {target}). Click 'Update' for each host below, then restart that host:",
         "restart_title": "🔄 Restart required:",
         "restart_hints": {
             "claude": "Start a new Claude Code session so the MCP server loads the new version (running sessions keep using the old one).",
@@ -307,6 +311,7 @@ PAGE_TEMPLATE = """
   .flash.error { background: #fee; border-color: #c99; }
   .flash.restart { background: #e8f4ff; border: 1px solid #90caf9; color: #0d47a1; font-weight: 500; }
   button.btn-update { background: #fff4e0; border-color: #ffb74d; color: #b76e00; font-weight: 600; }
+  .ui-version { font-size: 0.45em; color: #999; font-weight: normal; vertical-align: middle; }
   form.inline { display: inline; }
   .path-override { width: 220px; font-size: 0.8em; }
   .chairman-chip { display: inline-block; background: #d0e0ff; border-radius: 16px; padding: 4px 10px; margin: 4px 4px 4px 0; font-size: 0.85em; border: 1px solid #aac; }
@@ -334,7 +339,17 @@ PAGE_TEMPLATE = """
   </div>
 {% endif %}
 
-<h1>{{ t.header }}</h1>
+{% if stale_hosts %}
+  <div class="flash" style="background: #fff4e0; border: 1px solid #ffb74d; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px; color: #b76e00;">
+    <strong style="font-size: 1.1em;">⚠️ {{ t.hosts_stale_title }}</strong>
+    <p style="margin: 6px 0 0 0; font-size: 0.9em;">
+      {{ t.hosts_stale_body.format(target=target_version) }}
+      {% for h in stale_hosts %}<br>· {{ h.label }} (@{{ h.pinned }}){% endfor %}
+    </p>
+  </div>
+{% endif %}
+
+<h1>{{ t.header }} <span class="ui-version">Setup-UI v{{ current_version }}</span></h1>
 <p class="hint">{{ t.hint_local }}</p>
 
 {% for category, message in get_flashed_messages(with_categories=true) %}
@@ -646,6 +661,12 @@ def index():
             "path_value": str(override) if override else spec.get("default_path", ""),
         })
 
+    stale_hosts = [
+        {"label": tool["label"], "pinned": tool["pinned"]}
+        for tool in tools
+        if tool["needs_update"]
+    ]
+
     return render_template_string(
         PAGE_TEMPLATE,
         settings=settings,
@@ -658,6 +679,8 @@ def index():
         update_available=update_available,
         current_version=current_version,
         latest_version=latest_version or "",
+        target_version=target_version,
+        stale_hosts=stale_hosts,
     )
 
 

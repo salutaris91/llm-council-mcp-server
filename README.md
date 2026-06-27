@@ -189,7 +189,10 @@ args = ["/path/to/llm-council-mcp/server.py"]
 This repository is set up with **Trusted Publishing** to PyPI via GitHub Actions. Releases are triggered tokenless using OIDC.
 
 To release a new version:
-1. Update the version string in `_version.py` (e.g. `0.1.4`).
+1. Update the version string in `_version.py` (e.g. `0.1.4`). This is the single
+   source of truth — `pyproject.toml`, the installer pin, **and the version shown
+   in the Setup UI header** all derive from it automatically, so there is no
+   separate place to update the displayed version.
 2. Commit and push the changes to `main`.
 3. Create and push a version tag matching `v*.*.*`:
    ```bash
