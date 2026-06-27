@@ -52,6 +52,7 @@
 - DEV_MODE = False standardmäßig im Release-Paket gesetzt.
 
 ## Soon
+- **Per-Host „Neustart ausstehend"-Anzeige.** Aktuell vergleicht der Stale-Host-Banner / „Aktualisieren"-Button nur den *Config-Pin* mit der Zielversion. Beim Klick auf „Aktualisieren" wird der Pin sofort geschrieben, also verschwindet die Markierung — obwohl der Host-Prozess noch die alte Version fährt, bis er neu gestartet wird. Gewünscht: zwischen „Config aktualisiert" und „Host läuft tatsächlich schon auf neuer Version" unterscheiden und z. B. „Neustart ausstehend: Codex, Claude Code" anzeigen. Knackpunkt: die *laufende* Version ist nur für den server-eingebetteten Prozess (Port-Ping/PID) ermittelbar, für CLI-Hosts (Codex/Claude) kaum — ggf. heuristisch über „seit Config-Änderung noch kein Neustart erkannt" lösen.
 - `keyring`-Backend (API-Key im OS-Schlüsselspeicher statt Klartext-settings.json) als optionale Wahl.
 - Freundlichere Installer-Fehlermeldung bei kaputtem JSON in mcp_config.json (Zeile/Datei nennen).
 - Optional dünnes PyPI-Alias-Paket `llm-council-setup`, damit das bequeme bare `uvx llm-council-setup` funktioniert.
