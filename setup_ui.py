@@ -173,7 +173,7 @@ TRANSLATIONS = {
         "installer_not_registered": "War nicht eingetragen in {detail}",
         "installer_uninstall_error": "Fehler beim Entfernen: {detail}",
         "update_title": "Update verfügbar!",
-        "update_body": "Eine neuere Version ({latest}) ist auf PyPI verfügbar (installiert: {installed}). Zum Aktualisieren bitte den folgenden Befehl im Terminal ausführen, danach die Seite neu laden und erneut auf 'Installieren' klicken:",
+        "update_body": "Eine neuere Version ({latest}) ist auf PyPI verfügbar (installiert: {installed}). So aktualisierst du: 1) den folgenden Befehl im Terminal ausführen (öffnet die aktualisierte Setup-UI, ggf. auf einem anderen Port), 2) dort pro Host auf 'Installieren' klicken, 3) den Host neu starten. Erst nach dem Host-Neustart verschwindet dieser Hinweis – bloßes Neuladen der Seite genügt nicht:",
         "restart_title": "🔄 Neustart nötig:",
         "restart_hints": {
             "claude": "Starte eine neue Claude-Code-Session, damit der MCP-Server mit der neuen Version geladen wird (laufende Sessions nutzen weiter die alte).",
@@ -236,7 +236,7 @@ TRANSLATIONS = {
         "installer_not_registered": "Was not registered in {detail}",
         "installer_uninstall_error": "Error during removal: {detail}",
         "update_title": "Update Available!",
-        "update_body": "A newer version ({latest}) is available on PyPI (installed: {installed}). To update, please run the following command in your terminal, then reload this page and click 'Install' again:",
+        "update_body": "A newer version ({latest}) is available on PyPI (installed: {installed}). To update: 1) run the following command in your terminal (it opens the updated setup UI, possibly on a different port), 2) click 'Install' for each host there, 3) restart the host. This notice only disappears after the host restart – reloading this page alone is not enough:",
         "restart_title": "🔄 Restart required:",
         "restart_hints": {
             "claude": "Start a new Claude Code session so the MCP server loads the new version (running sessions keep using the old one).",
